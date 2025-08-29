@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>rustdesk部署教程 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="部署rustdesk中继服务器准备1.拥有一台Linux云服务器 推荐云服务系统镜像为ubuntu24.04  服务器控制台安全组（防火墙）放行如下端口 12TCP：21114-21119UDP：21116  2.拥有一个ssh工具，用来连接云服务器以下任性其一即可   WindTerm Xshell PUTTY Hyper MobaXterm    3.安装宝塔或者1panel利用上述已有的ss">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rustdesk部署教程">
+<meta property="og:url" content="http://example.com/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="部署rustdesk中继服务器准备1.拥有一台Linux云服务器 推荐云服务系统镜像为ubuntu24.04  服务器控制台安全组（防火墙）放行如下端口 12TCP：21114-21119UDP：21116  2.拥有一个ssh工具，用来连接云服务器以下任性其一即可   WindTerm Xshell PUTTY Hyper MobaXterm    3.安装宝塔或者1panel利用上述已有的ss">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-08-29T06:44:46.000Z">
+<meta property="article:modified_time" content="2025-08-29T06:49:16.036Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "rustdesk部署教程",
+  "url": "http://example.com/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-08-29T06:44:46.000Z",
+  "dateModified": "2025-08-29T06:49:16.036Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'rustdesk部署教程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">rustdesk部署教程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">rustdesk部署教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-29T06:44:46.000Z" title="Created 2025-08-29 14:44:46">2025-08-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-29T06:49:16.036Z" title="Updated 2025-08-29 14:49:16">2025-08-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="部署rustdesk中继服务器"><a href="#部署rustdesk中继服务器" class="headerlink" title="部署rustdesk中继服务器"></a>部署rustdesk中继服务器</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="1-拥有一台Linux云服务器"><a href="#1-拥有一台Linux云服务器" class="headerlink" title="1.拥有一台Linux云服务器"></a>1.拥有一台Linux云服务器</h3><blockquote>
+<p>推荐云服务系统镜像为ubuntu24.04</p>
+</blockquote>
+<p>服务器控制台安全组（防火墙）放行如下端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCP：21114-21119</span><br><span class="line">UDP：21116</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-拥有一个ssh工具，用来连接云服务器"><a href="#2-拥有一个ssh工具，用来连接云服务器" class="headerlink" title="2.拥有一个ssh工具，用来连接云服务器"></a>2.拥有一个ssh工具，用来连接云服务器</h3><p>以下任性其一即可</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://windterm.com.cn/download">WindTerm</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.xshell.com/zh/xshell/">Xshell</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PUTTY</a></li>
+<li><a target="_blank" rel="noopener" href="https://hyper.is/">Hyper</a></li>
+<li><a target="_blank" rel="noopener" href="https://mobaxterm.mobatek.net/">MobaXterm</a></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3-安装宝塔或者1panel"><a href="#3-安装宝塔或者1panel" class="headerlink" title="3.安装宝塔或者1panel"></a>3.安装<code>宝塔</code>或者<code>1panel</code></h3><p>利用上述已有的ssh工具连接到云服务器，用户为root，密码购买云服务器为自定义的</p>
+<h4 id="安装宝塔"><a href="#安装宝塔" class="headerlink" title="安装宝塔"></a>安装<code>宝塔</code></h4><p>Centos&#x2F;Redhat安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<p>Ubuntu&#x2F;Deepin安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; <span class="built_in">sudo</span> bash install.sh</span><br></pre></td></tr></table></figure>
+<p>Debian安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
+<p>Fedora安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; bash install.sh </span><br></pre></td></tr></table></figure>
+<p><strong>记录面板账户登录信息，服务器控制台安全组(防火墙)开放宝塔端口</strong></p>
+<hr>
+<h4 id="安装1Panel"><a href="#安装1Panel" class="headerlink" title="安装1Panel"></a>安装<code>1Panel</code></h4><p>Centos&#x2F;Redhat安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; sh quick_start.sh</span><br></pre></td></tr></table></figure>
+<p>Ubuntu安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; <span class="built_in">sudo</span> bash quick_start.sh</span><br></pre></td></tr></table></figure>
+<p>Debain安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh &amp;&amp; bash quick_start.sh</span><br></pre></td></tr></table></figure>
+<p><strong>按提示自定义配置默认端口，用户、密码等，记录最终1panel信息，服务器控制台安全组(防火墙)开放指定1Panel端口</strong></p>
+<hr>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="Docker容器编排服务器及API"><a href="#Docker容器编排服务器及API" class="headerlink" title="Docker容器编排服务器及API"></a>Docker容器编排服务器及API</h3><h4 id="1-访问宝塔-1Panel管理面板"><a href="#1-访问宝塔-1Panel管理面板" class="headerlink" title="1.访问宝塔&#x2F;1Panel管理面板"></a>1.访问<code>宝塔</code>&#x2F;<code>1Panel</code>管理面板</h4><p>打开浏览器访问</p>
+<blockquote>
+<p>http:&#x2F;&#x2F;&lt;云服务器公网IP&#x2F;IP&gt;:&lt;宝塔&#x2F;1Panel开放端口</p>
+</blockquote>
+<h2 id="输入宝塔-1Panel面板账户登录信息登录"><a href="#输入宝塔-1Panel面板账户登录信息登录" class="headerlink" title="输入宝塔&#x2F;1Panel面板账户登录信息登录"></a>输入<code>宝塔</code>&#x2F;<code>1Panel</code>面板账户登录信息登录</h2><h4 id="2-创建docker容器"><a href="#2-创建docker容器" class="headerlink" title="2.创建docker容器"></a>2.创建docker容器</h4><p>如果<code>宝塔</code>没下载docker，面板上点击下载即可</p>
+<ul>
+<li>面板导航栏点击容器，点击编排</li>
+<li>文件睡意取名，yml&#x2F;yaml都可以</li>
+<li>复制黏贴以下代码，<strong>修改对应IP及key信息</strong>(自定义中继服务器的key(rustdesk要填的那个key)</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">rustdesk-net:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">hbbs:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">hbbs</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21115</span><span class="string">:21115</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21116</span><span class="string">:21116</span> <span class="comment"># 自定义 hbbs 映射端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21116</span><span class="string">:21116/udp</span> <span class="comment"># 自定义 hbbs 映射端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21118</span><span class="string">:21118</span> <span class="comment"># web client</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">rustdesk/rustdesk-server</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">hbbs</span> <span class="string">-r</span> <span class="string">&lt;你的服务器IP/域名&gt;:21117</span> <span class="string">-k</span> <span class="string">&lt;自定义key&gt;</span> <span class="comment"># 填入个人域名或 IP + hbbr 暴露端口 并输入自定key</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/rustdesk/hbbs:/root</span> <span class="comment"># 自定义挂载目录</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rustdesk-net</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hbbr</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">64M</span></span><br><span class="line">  <span class="attr">hbbr:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">hbbr</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21117</span><span class="string">:21117</span> <span class="comment"># 自定义 hbbr 映射端口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21119</span><span class="string">:21119</span> <span class="comment"># web client</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">rustdesk/rustdesk-server</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">hbbr</span> <span class="string">-k</span> <span class="string">&lt;自定义key&gt;</span> <span class="comment">#输入自定义key</span></span><br><span class="line">    <span class="comment">#command: hbbr</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/rustdesk/hbbr:/root</span> <span class="comment"># 自定义挂载目录</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rustdesk-net</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">64M</span></span><br><span class="line">  <span class="attr">rustdesk-api:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rustdesk-api</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RUSTDESK_API_RUSTDESK_ID_SERVER=&lt;你的服务器IP/域名&gt;:21116</span> <span class="comment">#输入你的服务器IP/域名</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RUSTDESK_API_RUSTDESK_RELAY_SERVER=&lt;你的服务器IP/域名&gt;:21117</span> <span class="comment">#输入你的服务器IP/域名</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RUSTDESK_API_RUSTDESK_API_SERVER=http://&lt;你的服务器IP/域名&gt;:21114</span> <span class="comment">#输入你的服务器IP/域名</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">RUSTDESK_API_RUSTDESK_KEY=&lt;自定义key&gt;</span> <span class="comment">#输入自定义key</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">21114</span><span class="string">:21114</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">lejianwen/rustdesk-api</span></span><br><span class="line">    <span class="string">volumes:**粗体文本**</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/rustdesk/api:/app/data</span> <span class="comment">#将数据库挂载出来方便备份</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">rustdesk-net</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br></pre></td></tr></table></figure>
+<p><strong>点击开始编排，执行！</strong></p>
+<hr>
+<h4 id="3-API的使用"><a href="#3-API的使用" class="headerlink" title="3.API的使用"></a>3.API的使用</h4><p>输入以下地址访问API后台，<strong>默认用户名和密码为admin</strong></p>
+<blockquote>
+<p>http:&#x2F;&#x2F;&lt;你的服务器IP&#x2F;域名&gt;:21114</p>
+</blockquote>
+<p><strong>注</strong>：作者新的API密码是随机生成的，<strong>可能不是admin，需要修改一下</strong></p>
+<p>在宝塔&#x2F;1Panel面板容器找到<strong>rustdesk-api容器</strong>，以root身份打开容器终端(sh),输入以下命令修改API密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./apimain reset-admin-pwd &lt;自定义的密码&gt;</span><br></pre></td></tr></table></figure>
+<p>注：由于官方API是收费的，所以采用这个第三方API(端口为21114的容器)，可以使我们更便捷的管理我们的远程设备</p>
+<hr>
+<h3 id="云服务器源码直接部署"><a href="#云服务器源码直接部署" class="headerlink" title="云服务器源码直接部署"></a>云服务器源码直接部署</h3><h4 id="1-利用已有ssh工具远程连接云服务器"><a href="#1-利用已有ssh工具远程连接云服务器" class="headerlink" title="1.利用已有ssh工具远程连接云服务器"></a>1.利用已有ssh工具远程连接云服务器</h4><p>以下任性其一即可</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://windterm.com.cn/download">WindTerm</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.xshell.com/zh/xshell/">Xshell</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">PUTTY</a></li>
+<li><a target="_blank" rel="noopener" href="https://hyper.is/">Hyper</a></li>
+<li><a target="_blank" rel="noopener" href="https://mobaxterm.mobatek.net/">MobaXterm</a></li>
+</ul>
+</blockquote>
+<h4 id="2-部署rustdesk中继服务器"><a href="#2-部署rustdesk中继服务器" class="headerlink" title="2.部署rustdesk中继服务器"></a>2.部署rustdesk中继服务器</h4><p>输入以下命令(<strong>以下是ubuntu环境</strong>）</p>
+<h5 id="切换到root"><a href="#切换到root" class="headerlink" title="切换到root"></a>切换到root</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> -s</span><br></pre></td></tr></table></figure>
+<h5 id="更新软件包"><a href="#更新软件包" class="headerlink" title="更新软件包"></a>更新软件包</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-update</span><br><span class="line">apt-upgrade</span><br></pre></td></tr></table></figure>
+<h5 id="部署rustdesk-server"><a href="#部署rustdesk-server" class="headerlink" title="部署rustdesk server"></a>部署rustdesk server</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.gitmirror.com/smianao/rustdeskinstall/master/install.sh &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>记录最终Public Key信息</strong></p>
+<h2 id="rustdesk使用"><a href="#rustdesk使用" class="headerlink" title="rustdesk使用"></a>rustdesk使用</h2><ul>
+<li><p>rustdesk客户端，设置(Settings)的网络(Network)中编辑中继服务器(ID&#x2F;Relay server)</p>
+<blockquote>
+<p>ID 服务器(ID server): <code>&lt;你的服务器IP&gt;</code><br>中继服务器(Relay server)：<code>&lt;你的服务器IP&gt;</code><br>API服务器(API server)：<code>http://&lt;你的服务器IP&gt;:21114 | 如果没部署API(上面的容器部署)，则不用填</code><br>Key(Key)：<code>&lt;你的中继服务器key&gt;</code></p>
+</blockquote>
+</li>
+<li><p>rustdesk客户端，设置(Settings)中账户(Accout)登录(Login)</p>
+<blockquote>
+<p>用户名(Username)：<code>admin</code><br>密码(Password)：<code>&lt;你的API密码 | default(&#39;admin&#39;)&gt;</code></p>
+</blockquote>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/">http://example.com/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/19/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2rustdesk%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">部署rustdesk中继服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8B%A5%E6%9C%89%E4%B8%80%E5%8F%B0Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.拥有一台Linux云服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8B%A5%E6%9C%89%E4%B8%80%E4%B8%AAssh%E5%B7%A5%E5%85%B7%EF%BC%8C%E7%94%A8%E6%9D%A5%E8%BF%9E%E6%8E%A5%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.拥有一个ssh工具，用来连接云服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E6%88%96%E8%80%851panel"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.安装宝塔或者1panel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">安装宝塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%851Panel"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">安装1Panel</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">1.2.</span> <span class="toc-text">部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8AAPI"><span class="toc-number">1.2.1.</span> <span class="toc-text">Docker容器编排服务器及API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AE%BF%E9%97%AE%E5%AE%9D%E5%A1%94-1Panel%E7%AE%A1%E7%90%86%E9%9D%A2%E6%9D%BF"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1.访问宝塔&#x2F;1Panel管理面板</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%AE%9D%E5%A1%94-1Panel%E9%9D%A2%E6%9D%BF%E8%B4%A6%E6%88%B7%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E7%99%BB%E5%BD%95"><span class="toc-number">1.3.</span> <span class="toc-text">输入宝塔&#x2F;1Panel面板账户登录信息登录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BAdocker%E5%AE%B9%E5%99%A8"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">2.创建docker容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-API%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">3.API的使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E7%9B%B4%E6%8E%A5%E9%83%A8%E7%BD%B2"><span class="toc-number">1.3.1.</span> <span class="toc-text">云服务器源码直接部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%A9%E7%94%A8%E5%B7%B2%E6%9C%89ssh%E5%B7%A5%E5%85%B7%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1.利用已有ssh工具远程连接云服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%83%A8%E7%BD%B2rustdesk%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">2.部署rustdesk中继服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0root"><span class="toc-number">1.3.1.2.1.</span> <span class="toc-text">切换到root</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">1.3.1.2.2.</span> <span class="toc-text">更新软件包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2rustdesk-server"><span class="toc-number">1.3.1.2.3.</span> <span class="toc-text">部署rustdesk server</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rustdesk%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">rustdesk使用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/29/rustdesk%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/" title="rustdesk部署教程">rustdesk部署教程</a><time datetime="2025-08-29T06:44:46.000Z" title="Created 2025-08-29 14:44:46">2025-08-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/19/hello-world/" title="Hello World">Hello World</a><time datetime="2025-08-19T02:33:33.360Z" title="Created 2025-08-19 10:33:33">2025-08-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
