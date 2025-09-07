@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>gentoo安装教程 | 咸鱼の小破站</title><meta name="author" content="MarioHY"><meta name="copyright" content="MarioHY"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="gentoo安装下载镜像CD镜像可以从官方下载页或任意一个镜像站下载。  配置启动盘使用软件配置该镜像的启动盘   rufs ventory   或者在已有linux系统上dd写入U盘 1dd if&#x3D;install-amd64-minimal-&lt;发布时间戳&gt;.iso of&#x3D;&#x2F;dev&#x2F;sdd bs&#x3D;4096 status&#x3D;progress &amp;&amp; sync  配置网络配置有">
+<meta property="og:type" content="website">
+<meta property="og:title" content="gentoo安装教程">
+<meta property="og:url" content="https://mariohy.github.io/2025/09/07/gentoo%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="咸鱼の小破站">
+<meta property="og:description" content="gentoo安装下载镜像CD镜像可以从官方下载页或任意一个镜像站下载。  配置启动盘使用软件配置该镜像的启动盘   rufs ventory   或者在已有linux系统上dd写入U盘 1dd if&#x3D;install-amd64-minimal-&lt;发布时间戳&gt;.iso of&#x3D;&#x2F;dev&#x2F;sdd bs&#x3D;4096 status&#x3D;progress &amp;&amp; sync  配置网络配置有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mariohy.github.io/img/cover/two.png">
+<meta property="article:published_time" content="2025-09-07T11:47:42.000Z">
+<meta property="article:modified_time" content="2025-09-07T11:48:16.250Z">
+<meta property="article:author" content="MarioHY">
+<meta property="article:tag" content="gentoo 教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mariohy.github.io/img/cover/two.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/avatar.png"><link rel="canonical" href="https://mariohy.github.io/2025/09/07/gentoo%E5%AE%89%E8%A3%85/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'gentoo安装教程',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'blog'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/default_top_img.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">咸鱼の小破站</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">gentoo安装教程</h1></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="gentoo安装"><a href="#gentoo安装" class="headerlink" title="gentoo安装"></a>gentoo安装</h1><h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p>CD镜像可以从<a target="_blank" rel="noopener" href="https://www.gentoo.org/downloads/">官方下载页</a>或任意一个<a target="_blank" rel="noopener" href="https://www.gentoo.org/downloads/mirrors/">镜像站</a>下载。</p>
+<hr>
+<h2 id="配置启动盘"><a href="#配置启动盘" class="headerlink" title="配置启动盘"></a>配置启动盘</h2><p>使用软件配置该镜像的启动盘</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufs</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ventoy.net/cn/">ventory</a></li>
+</ul>
+</blockquote>
+<p>或者在已有linux系统上dd写入U盘</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=install-amd64-minimal-&lt;发布时间戳&gt;.iso of=/dev/sdd bs=4096 status=progress &amp;&amp; <span class="built_in">sync</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><p>有线的不用配置，ping的通就行，例如ping archlinux.org<br>无线的可以使用以下命令配置网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net-setup</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="启动SSH服务"><a href="#启动SSH服务" class="headerlink" title="启动SSH服务"></a>启动SSH服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service sshd start</span><br></pre></td></tr></table></figure>
+<p>这样可以通过ssh进行连接操作<br>开启后记得设置一下密码，默认的livecd账户都是root</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<p>查看ip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip -br a s</span><br></pre></td></tr></table></figure>
+<p>然后连接即可</p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>可以采用<code>cfdisk</code>或<code>parted</code>或<code>fdisk</code>又或者<code>gdisk</code><br>我这里模拟测试分的是30G</p>
+<table>
+<thead>
+<tr>
+<th align="left">分区</th>
+<th align="left">大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">EFI</td>
+<td align="left">1G</td>
+</tr>
+<tr>
+<td align="left">swap</td>
+<td align="left">4G</td>
+</tr>
+<tr>
+<td align="left">&#x2F;</td>
+<td align="left">25G</td>
+</tr>
+<tr>
+<td align="left"><code>cfdisk</code>配置的话类型分别选择<em>EFI、Linux Swap、Linux FileSystem</em></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>parted</code>和<code>fdisk</code>就不用管，一个类型标签而已，不影响，只是加了方便看而已，按规定大小分区就行</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h3><p><code>btrfs</code>、<code>ext4</code>、<code>xfs</code>文件系统个人习惯</p>
+<ul>
+<li><code>btrfs</code>有快照功能，更方便，但读写次数多，长期容易损坏硬盘，适用想频繁快照恢复的</li>
+<li><code>ext4</code>是非常常用的一种，稳定比较高，适用个人</li>
+<li><code>xfs</code>性能提升了一点，但是文件系统不能缩小，适用与服务器</li>
+</ul>
+<p>这边我使用ext4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sda      8:0    0    30G  0 disk </span><br><span class="line">├─sda1   8:1    0     1G  0 part </span><br><span class="line">├─sda2   8:2    0     4G  0 part </span><br><span class="line">└─sda3   8:3    0    25G  0 part </span><br></pre></td></tr></table></figure>
+<p>比如分区用以下命令<br>格式化EFI分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat -F 32 /dev/sda1</span><br></pre></td></tr></table></figure>
+<p>格式化swap分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sda2</span><br></pre></td></tr></table></figure>
+<p>格式化&#x2F;分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda3</span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载配置分区"><a href="#挂载配置分区" class="headerlink" title="挂载配置分区"></a>挂载配置分区</h3><p>启用<code>swap</code>分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /dev/sda2</span><br></pre></td></tr></table></figure>
+<p>查看swap分区启用情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br></pre></td></tr></table></figure>
+<hr>
+<p>挂载<code>/</code>分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda3 /mnt/gentoo</span><br></pre></td></tr></table></figure>
+<p>注：如果不存在&#x2F;mnt&#x2F;gentoo，可以采用如下命令创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> --parents /mnt/gentoo</span><br></pre></td></tr></table></figure>
+<hr>
+<p>挂载<code>EFI</code>分区(这边用的是&#x2F;efi,有三种&#x2F;efi,&#x2F;boot,&#x2F;boot &#x2F;boot&#x2F;efi）<br>这里采用的是efi安装的就先创建先</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> --parents /mnt/gentoo/efi</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda1 /mnt/gentoo/efi</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="安装stage文件"><a href="#安装stage文件" class="headerlink" title="安装stage文件"></a>安装stage文件</h3><p>Gentoo 的 stage 文件 是用于快速初始化系统安装的 预编译基础系统镜像，其核心作用是跳过最耗时的系统核心组件编译步骤，为后续手动配置和编译完整系统打下基础。<br>根据编译程度和用途，stage 文件主要分为以下几类，对应不同的安装需求：</p>
+<ul>
+<li>stage3：最常用的类型，包含完整的基础系统（如内核、编译器、基础命令等），已预编译并可直接启动，适合绝大多数用户快速开始安装。</li>
+<li>stage1&#x2F;stage2：仅包含最核心的工具链（如GCC、binutils），需从源码逐步编译出完整基础系统，仅用于追求极致自定义（如特殊架构、最小化系统）的高级用户，普通用户无需使用。</li>
+<li>stage4：非官方标准类型，通常是第三方制作的 “半成品”系统镜像（可能包含桌面环境、驱动等），旨在进一步简化安装，但兼容性和定制性不如官方 stage3。</li>
+</ul>
+<p>首先移动到根</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mnt/gentoo</span><br></pre></td></tr></table></figure>
+<p>date查看时间是否符合</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure>
+<p>使用ntp来纠正时钟偏差</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chronyd -q</span><br></pre></td></tr></table></figure>
+
+<p>下载stage文件，例如本案例采用清华源的stage3的amd64-destop-systemd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/gentoo/releases/amd64/autobuilds/20250831T170358Z/stage3-amd64-desktop-systemd-20250831T170358Z.tar.xz</span><br></pre></td></tr></table></figure>
+<p>解压一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xpvf stage3-*.tar.xz --xattrs-include=<span class="string">&#x27;*.*&#x27;</span> --numeric-owner -C /mnt/gentoo</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置编译选项"><a href="#配置编译选项" class="headerlink" title="配置编译选项"></a>配置编译选项</h3><p>vim 编辑etc&#x2F;portage&#x2F;make.conf，不会用可以用nano</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim etc/portage/make.conf</span><br></pre></td></tr></table></figure>
+<p>添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAKEOPTS=&quot;-j12&quot;</span><br><span class="line">GENTOO_MIRRORS=&quot;https://mirrors.tuna.tsinghua.edu.cn/gentoo/&quot;</span><br><span class="line">USE=&quot;systemd -elogind alas pipewire icu policykit udisks archive udev -gtk -gnome qt6 qt5 gtk4 gtk3 gtk2 kde alsa X xorg wayland opengl vulkan fcitx dist-kernel dbus openssl ffmpeg&quot;</span><br><span class="line">VIDEO_CARDS=&quot;amdgpu radeonsi&quot;</span><br><span class="line">ACCEPT_LICENSE=&quot;*&quot;</span><br><span class="line">LINGUAS=&quot;en en_US zh zh_CN&quot;</span><br><span class="line">L10N=&quot;en en-US zh zh-Hans zh-Hans-CN zh-CN&quot;</span><br><span class="line">GRUB_PLATFORMS=&quot;efi-64&quot;</span><br></pre></td></tr></table></figure>
+<p>注意：<br><strong>MAKEOPTS</strong>：编译的线程数，最好取你的CPU逻辑核心数和已内存为单位的&#x2F;2之间选一个小的<br>我这里8G内存，4核2线程也就是8线程。保守的话就3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MAKEOPTS=&quot;-j4&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>GENTOO_MIRRORS</strong>：设置为tuna清华源</p>
+<p><strong>USE</strong>：</p>
+<ul>
+<li>systemd 因为这里用的stage守护进程选的是systemd，用着优化更好,-elogind避免与systemd冲突</li>
+<li>pipewire是音频守护进程</li>
+<li>policykit事关权限要加</li>
+<li>archive文件管理器</li>
+<li>-gtk -gnome kde意思是不用gnome桌面环境，用kde。用gnome的话就是-gtk gnome -kde</li>
+<li>X xorg图形化显示协议，新的一种是wayland，但兼容性没有xorg好，都开</li>
+<li>vulkan 对显卡的一些优化</li>
+<li>fcitx输入法</li>
+<li>openssl可以选依赖</li>
+<li>ffmpeg对音频进行优化</li>
+</ul>
+<p><strong>VIDEO_CARDS</strong>：<br>这个可以在gentoo wiki安装选择适合自己的</p>
+<blockquote>
+<p>gentoo wiki VIDEO_CARDS:<br><a target="_blank" rel="noopener" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation/en#VIDEO_CARDS">https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation/en#VIDEO_CARDS</a></p>
+</blockquote>
+<p>这边我intel，我改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VIDEO_CARDS=&quot;intel&quot;</span><br></pre></td></tr></table></figure>
+
+<p>ACCEPT_LICENSE：*，所有的证书都允许，省事</p>
+<p>GRUB_PLATFORMS：grub boot lodaer引导的设置</p>
+<hr>
+<p>可以修改添加一下COMMON_FLAGS，对cpu进行一下优化,O2是比较保守的优化，激进一点就O3，-pipe指用管道进行编译，会加快速度，但是对内存有要求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COMMON_FLAGS=&quot;-march=native -O2 -pipe&quot;</span><br></pre></td></tr></table></figure>
+<p>加上-finline-functions</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COMMON_FLAGS=&quot;-march=native -O2 -pipe -finline-functions&quot;</span><br></pre></td></tr></table></figure>
+<p>要加-fgraphito-identity如下参数，还要新建编辑一个文件etc&#x2F;portage&#x2F;package.use&#x2F;gcc,vim编辑添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys-devel/gcc graphite</span><br></pre></td></tr></table></figure>
+<p>这里我就不加了，比较慢</p>
+<p>可以加-fno-math-errno -fno-trapping-math，对浮点进行优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COMMON_FLAGS=&quot;-march=native -O2 -pipe -finline-functions -fno-math-errno -fno-trapping-math&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Chrooting"><a href="#Chrooting" class="headerlink" title="Chrooting"></a>Chrooting</h3><h4 id="复制DNS信息"><a href="#复制DNS信息" class="headerlink" title="复制DNS信息"></a>复制DNS信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> --dereference /etc/resolv.conf /mnt/gentoo/etc/</span><br></pre></td></tr></table></figure>
+<p>可以arch脚本移动到root</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt/gentoo</span><br></pre></td></tr></table></figure>
+<p>有些发行版会将&#x2F;dev&#x2F;shm链接到 &#x2F;run&#x2F;shm&#x2F;，官方的这个min不用，如果是链接这种情况就得配置如下操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> -L /dev/shm &amp;&amp; <span class="built_in">rm</span> /dev/shm &amp;&amp; <span class="built_in">mkdir</span> /dev/shm</span><br><span class="line">mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm</span><br><span class="line"><span class="built_in">chmod</span> 1777 /dev/shm /run/shm</span><br></pre></td></tr></table></figure>
+<p>进入新环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chroot</span> /mnt/gentoo /bin/bash</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="built_in">export</span> PS1=<span class="string">&quot;(chroot) <span class="variable">$&#123;PS1&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置Portage"><a href="#配置Portage" class="headerlink" title="配置Portage"></a>配置Portage</h3><p>更新一下webrsync，从网络安装 Gentoo ebuild 仓库快照</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge-webrsync</span><br></pre></td></tr></table></figure>
+
+<p>阅读新闻条目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eselect news list</span><br><span class="line">eselect news <span class="built_in">read</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="选择正确的配置文件"><a href="#选择正确的配置文件" class="headerlink" title="选择正确的配置文件"></a>选择正确的配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eselect profile list</span><br></pre></td></tr></table></figure>
+<p>这里的默认选择,适合hyperland</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4]   default/linux/amd64/23.0/desktop/systemd (stable) *</span><br></pre></td></tr></table></figure>
+<p>这边我改选为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eselect profile <span class="built_in">set</span> 7</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[7]   default/linux/amd64/23.0/desktop/plasma (stable) *</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新-world集合"><a href="#更新-world集合" class="headerlink" title="更新@world集合"></a>更新@world集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask --verbose --update --deep --changed-use @world</span><br></pre></td></tr></table></figure>
+
+<p><strong>报错了</strong><br><strong>解决media-video&#x2F;pipewire 包存在未满足的依赖约束</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建 pipewire 配置文件</span><br><span class="line">nano /etc/portage/package.use/pipewire</span><br><span class="line"></span><br><span class="line"># 为 pipewire 启用 extra USE 标志，匹配 ffmpeg 依赖</span><br><span class="line">media-video/pipewire extra</span><br></pre></td></tr></table></figure>
+<p><strong>解决软件包循环依赖问题，核心是 ffmpeg、libsdl2、pipewire 三者之间形成了依赖闭环</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建 sdl2 配置文件</span><br><span class="line">nano /etc/portage/package.use/sdl2</span><br><span class="line"></span><br><span class="line"># 临时关闭 libsdl2 的 pipewire 依赖，解决循环依赖问题</span><br><span class="line">media-libs/libsdl2 -pipewire</span><br></pre></td></tr></table></figure>
+<p><strong>重新执行更新命令，优先安装循环中的包</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask --verbose --update --deep --changed-use @world</span><br></pre></td></tr></table></figure>
+<p><strong>安装完成后恢复 libsdl2 的 pipewire 支持</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 sdl2 配置文件，删除或注释掉那一行</span></span><br><span class="line">nano /etc/portage/package.use/sdl2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存退出后，重新更新一次 libsdl2 即可</span></span><br><span class="line">emerge --ask --verbose media-libs/libsdl2</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除没用的包"><a href="#删除没用的包" class="headerlink" title="删除没用的包"></a>删除没用的包</h3><p>查看输出，是否确定删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask --pretend --depclean</span><br></pre></td></tr></table></figure>
+<p>happy，那就删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask --depclean</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置时区"><a href="#设置时区" class="headerlink" title="设置时区"></a>设置时区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf ./usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成时区设置"><a href="#生成时区设置" class="headerlink" title="生成时区设置"></a>生成时区设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/locale.gen</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上</span></span><br><span class="line">en_US.UTF-8 UTF-8</span><br><span class="line">zh_CN.UTF-8 UTF-8</span><br></pre></td></tr></table></figure>
+
+<p>运行locale-gen命令，生成&#x2F;etc&#x2F;locale.gen文件中的所有指定的地区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+<p>现在当前配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eselect locale list</span><br></pre></td></tr></table></figure>
+<p>更改配置,我这里的4是en_US</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eselect locale <span class="built_in">set</span> 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>现在重新加载环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env-update &amp;&amp; <span class="built_in">source</span> /etc/profile &amp;&amp; <span class="built_in">export</span> PS1=<span class="string">&quot;(chroot) <span class="variable">$&#123;PS1&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h3><p>编辑&#x2F;etc&#x2F;portage&#x2F;package.use&#x2F;installkernel</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/portage/package.use/installkernel</span><br><span class="line">sys-kernel/installkernel grub</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新配置文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch-conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask sys-kernel/gentoo-kernel</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装固件和微码"><a href="#安装固件和微码" class="headerlink" title="安装固件和微码"></a>安装固件和微码</h3><p>安装Linux Firmware</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask sys-kernel/linux-firmware</span><br></pre></td></tr></table></figure>
+<p>安装SOF Firmware</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask sys-firmware/sof-firmware</span><br></pre></td></tr></table></figure>
+
+<p>安装intel的微码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av sys-firmware/intel-microcode</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置fstab文件"><a href="#配置fstab文件" class="headerlink" title="配置fstab文件"></a>配置fstab文件</h3><p>便捷的方法：安装genfstab工具自动生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av sys-fs/genfstab</span><br></pre></td></tr></table></figure>
+<p>生成分区信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab /</span><br></pre></td></tr></table></figure>
+<p>以UUID的方式挂载生成分区信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /</span><br></pre></td></tr></table></figure>
+<p>输出到fstab</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U / &gt; /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置主机名"><a href="#配置主机名" class="headerlink" title="配置主机名"></a>配置主机名</h3><p>例如galaxy</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> galaxy &gt; /etc/hostname</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="配置dhcp"><a href="#配置dhcp" class="headerlink" title="配置dhcp"></a>配置dhcp</h3><p>安装dhcp包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask net-misc/dhcpcd</span><br></pre></td></tr></table></figure>
+<p>确保systemd中启用服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置root密码"><a href="#设置root密码" class="headerlink" title="设置root密码"></a>设置root密码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="启用sshd"><a href="#启用sshd" class="headerlink" title="启用sshd"></a>启用sshd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sshd</span><br></pre></td></tr></table></figure>
+
+<h3 id="Shell补全安装和启用"><a href="#Shell补全安装和启用" class="headerlink" title="Shell补全安装和启用"></a>Shell补全安装和启用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask app-shells/bash-completion</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装时间同步包"><a href="#安装时间同步包" class="headerlink" title="安装时间同步包"></a>安装时间同步包</h3><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask net-misc/chrony</span><br></pre></td></tr></table></figure>
+<p>启用时间同步服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> chronyd.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件系统工具"><a href="#文件系统工具" class="headerlink" title="文件系统工具"></a>文件系统工具</h3><p>ext4工具下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av sys-fs/e2fsprogs</span><br></pre></td></tr></table></figure>
+<p>XFS工具下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av sys-fs/xfsprogs</span><br></pre></td></tr></table></figure>
+<p>btrfs工具下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av sys-fs/btrfs-progs</span><br></pre></td></tr></table></figure>
+<p>VFAT工具下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --av sys-fs/dosfstools</span><br></pre></td></tr></table></figure>
+<p>建议安装 sys-block&#x2F;io-scheduler-udev-rules 以确保与例如 nvme 设备等正确的调度器行为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask sys-block/io-scheduler-udev-rules</span><br></pre></td></tr></table></figure>
+
+<h3 id="grub工具安装"><a href="#grub工具安装" class="headerlink" title="grub工具安装"></a>grub工具安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge --ask --verbose sys-boot/grub</span><br></pre></td></tr></table></figure>
+<p>如果要多系统检测引导的话，需要安装我们熟知os-prober</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emerge -av os-prober</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装grub引导器"><a href="#安装grub引导器" class="headerlink" title="安装grub引导器"></a>安装grub引导器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=gentoo</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成配置grub配置文件"><a href="#生成配置grub配置文件" class="headerlink" title="生成配置grub配置文件"></a>生成配置grub配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<p>重启之前，可以创建一个用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G <span class="built_in">users</span>,wheel,audio -s /bin/bash 用户名</span><br></pre></td></tr></table></figure>
+<p>设置一下密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户名</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除stage文件-可选"><a href="#删除stage文件-可选" class="headerlink" title="删除stage文件(可选)"></a>删除stage文件(可选)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> /stage3-*.tar.*</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mariohy.github.io">MarioHY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mariohy.github.io/2025/09/07/gentoo%E5%AE%89%E8%A3%85/">https://mariohy.github.io/2025/09/07/gentoo%E5%AE%89%E8%A3%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://mariohy.github.io" target="_blank">咸鱼の小破站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/gentoo-%E6%95%99%E7%A8%8B/">gentoo 教程</a></div><div class="post-share"><div class="social-share" data-image="/img/cover/two.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav id="pagination"><div class="pagination"></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">MarioHY</div><div class="author-info-description">oiiaioiiiiai</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MarioHY"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/MarioHY" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="/mariohyn@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">👏👏 希望和各位站友共同进步！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/07/gentoo%E5%AE%89%E8%A3%85/" title="gentoo安装教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/two.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gentoo安装教程"/></a><div class="content"><a class="title" href="/2025/09/07/gentoo%E5%AE%89%E8%A3%85/" title="gentoo安装教程">gentoo安装教程</a><time datetime="2025-09-07T11:47:42.000Z" title="发表于 2025-09-07 19:47:42">2025-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/05/fedora%E8%99%9A%E6%8B%9F%E5%8C%96/" title="fedora虚拟化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/one.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fedora虚拟化"/></a><div class="content"><a class="title" href="/2025/09/05/fedora%E8%99%9A%E6%8B%9F%E5%8C%96/" title="fedora虚拟化">fedora虚拟化</a><time datetime="2025-09-05T14:09:09.000Z" title="发表于 2025-09-05 22:09:09">2025-09-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/29/rustdesk%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/" title="rustdesk中继服务器部署"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/five.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="rustdesk中继服务器部署"/></a><div class="content"><a class="title" href="/2025/08/29/rustdesk%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/" title="rustdesk中继服务器部署">rustdesk中继服务器部署</a><time datetime="2025-08-29T09:45:55.000Z" title="发表于 2025-08-29 17:45:55">2025-08-29</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/fedora-%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 1.15em; color: rgb(54, 50, 70);">fedora 虚拟化</a><a href="/tags/rustdesk/" style="font-size: 1.15em; color: rgb(70, 95, 135);">rustdesk</a><a href="/tags/%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.15em; color: rgb(50, 110, 197);">中继服务器</a><a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 1.15em; color: rgb(195, 80, 129);">部署</a><a href="/tags/gentoo-%E6%95%99%E7%A8%8B/" style="font-size: 1.15em; color: rgb(50, 50, 115);">gentoo 教程</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">3</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-07T11:49:19.326Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/default_top_img.webp);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By MarioHY</span><span class="framework-info"><span>网站 </span><a target="_blank" rel="noopener" href="https://github.com/MarioHY/">github</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><canvas id="star-canvas"></canvas><script src="/js/star-canvas.js"></script><script src="/js/canvas-nest.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
