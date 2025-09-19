@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux基础(1)-虚拟机网络配置 | 咸鱼の小破站</title><meta name="author" content="MarioHY"><meta name="copyright" content="MarioHY"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="虚拟机VMware网络虚拟机网络服务network旧版的网络服务，早期的Linux服务器和嵌入设备，提供稳定的静态网络管理。 配置文件：&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ethxx 如下是配置静态ip的关键点 1234567ONBOOT&#x3D;yesBOOTPROTO&#x3D;staticIPADDR&#x3D;192.168.113.110NETMASK&#x3D;255.255.255.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Linux基础(1)-虚拟机网络配置">
+<meta property="og:url" content="https://mariohy.github.io/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="咸鱼の小破站">
+<meta property="og:description" content="虚拟机VMware网络虚拟机网络服务network旧版的网络服务，早期的Linux服务器和嵌入设备，提供稳定的静态网络管理。 配置文件：&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ethxx 如下是配置静态ip的关键点 1234567ONBOOT&#x3D;yesBOOTPROTO&#x3D;staticIPADDR&#x3D;192.168.113.110NETMASK&#x3D;255.255.255.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mariohy.github.io/img/cover/four.png">
+<meta property="article:published_time" content="2025-09-19T13:28:41.000Z">
+<meta property="article:modified_time" content="2025-09-19T13:34:51.497Z">
+<meta property="article:author" content="MarioHY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mariohy.github.io/img/cover/four.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/avatar.png"><link rel="canonical" href="https://mariohy.github.io/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux基础(1)-虚拟机网络配置',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'blog'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/default_top_img.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">咸鱼の小破站</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">Linux基础(1)-虚拟机网络配置</h1></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="虚拟机VMware网络"><a href="#虚拟机VMware网络" class="headerlink" title="虚拟机VMware网络"></a>虚拟机VMware网络</h2><h3 id="虚拟机网络服务"><a href="#虚拟机网络服务" class="headerlink" title="虚拟机网络服务"></a>虚拟机网络服务</h3><h4 id="network"><a href="#network" class="headerlink" title="network"></a>network</h4><p>旧版的网络服务，早期的Linux服务器和嵌入设备，提供稳定的<code>静态网络管理</code>。</p>
+<p><strong>配置文件</strong>：<code>/etc/sysconfig/network-scripts/ifcfg-ethxx</code></p>
+<p><strong>如下是配置静态ip的关键点</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ONBOOT=<span class="built_in">yes</span></span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=192.168.113.110</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.113.245</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DNS2=8.8.8.8</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ONBOOT ：是否启用该设备</li>
+<li>BOOTPROTO ： 如何获取IP的参数。例如none、static、dhcp、bootp</li>
+<li>IPADDR ： 自定义的IP地址</li>
+<li>NETMASK ： 划分子网</li>
+<li>GATEWAY ： 网关地址，转到Internet的中间人</li>
+<li>DNS ： 解析域名的IP地址</li>
+</ul>
+<h4 id="NetworkManager"><a href="#NetworkManager" class="headerlink" title="NetworkManager"></a>NetworkManager</h4><p>新版的网络服务， <code>动态网络环境</code>的支持，一个高级的网络管理器，提供了有nmtui图形化管理、nmcli命令行工具并提供了自动检测和配置网络连接的功能，支持多分网络连接管理方式，例如以太网、WIFI等。</p>
+<p><strong>配置文件</strong>：  <code>/etc/NetworkManager/system-connections/*</code></p>
+<p>NetworkManager管理就方便的多，可以用<code>nmtui</code>或<code>nmcli</code>修改或添加网络连接配置文件，记不住<code>nmcli</code>的可以<code>man nmcli-examples</code>或者修改配置文件，if you know，you know。</p>
+<h4 id="network和NetworkManager服务"><a href="#network和NetworkManager服务" class="headerlink" title="network和NetworkManager服务"></a>network和NetworkManager服务</h4><ol>
+<li>停止<code>network服务</code>只启用<code>NetworkManager服务</code>的情况下，NetworkManager同样会检测network配置文件(<code>/etc/sysconfig/network-scripts/ifcfg-ethxx</code>)，如果对于network中<code>ONBOOT=yes</code>的文件同样会被加载</li>
+<li><code>network服务</code>和<code>NetworkManager服务</code>同时存在的情况下，<code>network</code>读取所有<code>ifcfg</code>文件，对于每个<code>ONBOOT=yes</code>的文件，它检查<code>NetworkManager</code>是否已经从该<code>ifcfg</code>文件启动设备。如果<code>NetworkManager</code>正在启动该设备或已经启动该设备，则不再对该文件执行任何操作，并检查下一个<code>ONBOOT=yes</code>文件。如果<code>NetworkManager</code>还没有启动该设备，那么初始化脚本将继续下去，并为该ifcfg文件调用<code>ifup</code>。</li>
+<li>如果<code>虚拟机</code>采用<code>NAT</code>模式，你在<code>虚拟网络编辑器</code>那里<code>关闭</code>了<code>dhcp服务</code>，在<code>安装过程</code>重<code>配置</code>了自己manual的<code>IP地址</code>，<code>默认</code>使用<code>network</code>配置IP地址，默认<code>NetworkManager</code>的配置为空，那么需要关闭<code>NetworkManager服务</code>，否则<code>NetworkManager服务</code>不会显示IP地址。</li>
+</ol>
+<hr>
+<h3 id="虚拟机网络模式"><a href="#虚拟机网络模式" class="headerlink" title="虚拟机网络模式"></a>虚拟机网络模式</h3><h4 id="Bridged（桥接模式）"><a href="#Bridged（桥接模式）" class="headerlink" title="Bridged（桥接模式）"></a>Bridged（桥接模式）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/1.jpg" alt="1"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/2.jpg" alt="2"></p>
+<p><strong>宿主机与虚拟机与外网互通，可以相互访问</strong></p>
+<hr>
+<h4 id="NAT（网络地址转换）"><a href="#NAT（网络地址转换）" class="headerlink" title="NAT（网络地址转换）"></a>NAT（网络地址转换）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/3.jpg" alt="3"></p>
+<p><strong>如下图</strong> : 虚拟机可以通过<code>虚拟的NAT网关</code>转到<code>宿主机网卡IP</code>进行上网，<code>宿主机</code>可以通过<code>VMnet8虚拟网卡</code>来访问虚拟机，虚拟机访问不了宿主机。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/5.png" alt="5"></p>
+<hr>
+<h4 id="Host-Only（仅主机模式）"><a href="#Host-Only（仅主机模式）" class="headerlink" title="Host-Only（仅主机模式）"></a>Host-Only（仅主机模式）</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/4.jpg" alt="4"></p>
+<p><strong>如下图,虚拟机只能在虚拟机之间通讯,虚拟机不能访问外网,主机可以通过VMnet1虚拟网卡访问虚拟机</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/../img/blog/images/BasicLinux/6.png" alt="6"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mariohy.github.io">MarioHY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mariohy.github.io/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">https://mariohy.github.io/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://mariohy.github.io" target="_blank">咸鱼の小破站</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/cover/four.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav id="pagination"><div class="pagination"></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">MarioHY</div><div class="author-info-description">oiiaioiiiiai</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MarioHY"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/MarioHY" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="/mariohyn@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">👏👏 希望和各位站友共同进步！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Linux基础(1)-虚拟机网络配置"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/four.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础(1)-虚拟机网络配置"/></a><div class="content"><a class="title" href="/2025/09/19/Linux%E5%9F%BA%E7%A1%80(1)-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Linux基础(1)-虚拟机网络配置">Linux基础(1)-虚拟机网络配置</a><time datetime="2025-09-19T13:28:41.000Z" title="发表于 2025-09-19 21:28:41">2025-09-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/18/rocky%E9%83%A8%E7%BD%B2k8s/" title="rocky部署k8s"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/three.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="rocky部署k8s"/></a><div class="content"><a class="title" href="/2025/09/18/rocky%E9%83%A8%E7%BD%B2k8s/" title="rocky部署k8s">rocky部署k8s</a><time datetime="2025-09-18T00:36:31.000Z" title="发表于 2025-09-18 08:36:31">2025-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/08/arch%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="arch安装教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/one.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="arch安装教程"/></a><div class="content"><a class="title" href="/2025/09/08/arch%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="arch安装教程">arch安装教程</a><time datetime="2025-09-08T14:16:39.000Z" title="发表于 2025-09-08 22:16:39">2025-09-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/07/gentoo%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="gentoo安装教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/five.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="gentoo安装教程"/></a><div class="content"><a class="title" href="/2025/09/07/gentoo%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="gentoo安装教程">gentoo安装教程</a><time datetime="2025-09-07T11:47:42.000Z" title="发表于 2025-09-07 19:47:42">2025-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/05/fedora%E8%99%9A%E6%8B%9F%E5%8C%96/" title="fedora虚拟化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/four.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fedora虚拟化"/></a><div class="content"><a class="title" href="/2025/09/05/fedora%E8%99%9A%E6%8B%9F%E5%8C%96/" title="fedora虚拟化">fedora虚拟化</a><time datetime="2025-09-05T14:09:09.000Z" title="发表于 2025-09-05 22:09:09">2025-09-05</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/arch/" style="font-size: 1.15em; color: rgb(50, 121, 50);">arch</a><a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 1.3em; color: rgb(155, 99, 154);">安装</a><a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.45em; color: rgb(51, 158, 50);">教程</a><a href="/tags/fedora/" style="font-size: 1.15em; color: rgb(50, 65, 50);">fedora</a><a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 1.15em; color: rgb(50, 83, 80);">虚拟化</a><a href="/tags/gentoo/" style="font-size: 1.15em; color: rgb(50, 127, 50);">gentoo</a><a href="/tags/rustdesk/" style="font-size: 1.15em; color: rgb(50, 135, 142);">rustdesk</a><a href="/tags/%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.15em; color: rgb(50, 176, 50);">中继服务器</a><a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 1.3em; color: rgb(50, 175, 131);">部署</a><a href="/tags/k8s/" style="font-size: 1.15em; color: rgb(148, 131, 147);">k8s</a><a href="/tags/rocky/" style="font-size: 1.15em; color: rgb(53, 120, 153);">rocky</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">6</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-19T13:35:06.854Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/default_top_img.webp);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By MarioHY</span><span class="framework-info"><span>网站 </span><a target="_blank" rel="noopener" href="https://github.com/MarioHY/">github</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><canvas id="star-canvas"></canvas><script src="/js/star-canvas.js"></script><script src="/js/canvas-nest.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
