@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Linux基础(4)-基本配置文件 | 咸鱼の小破站</title><meta name="author" content="MarioHY"><meta name="copyright" content="MarioHY"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="系统重要的配置文件&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0：网卡配置文件 1234567891011121314TYPE&#x3D;Ethernet # 网络类型 以太网BOOTPROTO&#x3D;none # 配置IP的方式。dhcp自动获取；固定IP &#x3D;none&#x3D;staticNAME&#x3D;eth0 # 网卡在系统中的显示的名称UUID&#x3D;57320c40-63bb-46c4-">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Linux基础(4)-基本配置文件">
+<meta property="og:url" content="https://mariohy.github.io/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="咸鱼の小破站">
+<meta property="og:description" content="系统重要的配置文件&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0：网卡配置文件 1234567891011121314TYPE&#x3D;Ethernet # 网络类型 以太网BOOTPROTO&#x3D;none # 配置IP的方式。dhcp自动获取；固定IP &#x3D;none&#x3D;staticNAME&#x3D;eth0 # 网卡在系统中的显示的名称UUID&#x3D;57320c40-63bb-46c4-">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mariohy.github.io/img/cover/one.png">
+<meta property="article:published_time" content="2025-09-22T15:25:21.000Z">
+<meta property="article:modified_time" content="2025-09-22T15:26:02.637Z">
+<meta property="article:author" content="MarioHY">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="基础">
+<meta property="article:tag" content="配置文件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mariohy.github.io/img/cover/one.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/avatar.png"><link rel="canonical" href="https://mariohy.github.io/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 3 || hour >= 4
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux基础(4)-基本配置文件',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'blog'
+}</script><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/progress_head.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/progress_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg" style="background-image: url(/img/bg.gif);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/default_top_img.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">咸鱼の小破站</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fas fa-screwdriver-wrench"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">Linux基础(4)-基本配置文件</h1></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="系统重要的配置文件"><a href="#系统重要的配置文件" class="headerlink" title="系统重要的配置文件"></a>系统重要的配置文件</h2><p><code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>：网卡配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet # 网络类型 以太网</span><br><span class="line">BOOTPROTO=none # 配置IP的方式。dhcp自动获取；固定IP =none=static</span><br><span class="line"></span><br><span class="line">NAME=eth0 # 网卡在系统中的显示的名称</span><br><span class="line">UUID=57320c40-63bb-46c4-bd67-13800757e0de # UUID</span><br><span class="line">DEVICE=eth0 # 硬件的名称</span><br><span class="line">ONBOOT=yes # 开启自动运行network服务，自动启动该网卡</span><br><span class="line">IPADDR=192.168.192.100 #IP地址</span><br><span class="line">PREFIX =24 # 子网掩码24位</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.192.2 # 网关</span><br><span class="line">DNS1=223.5.5.5 # 阿里云的dns服务器地址</span><br><span class="line">DNS2=8.8.8.8 # 谷歌的dns服务器地址</span><br><span class="line">DNS3=114.114.114.114 # 电信的dns服务器地址</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/hosts</code> ：本地DNS解析配置文件</p>
+<p><strong>window</strong>：C:\Windows\System32\drivers\etc</p>
+<p><strong>顺序</strong>：&#x2F;etc&#x2F;host（本地解析）—&gt;&#x2F;etc&#x2F;resolv.conf（里面servername指定的dns服务器ip解析）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/hostname</code>：主机名配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostname myhost <span class="comment"># 临时修改主机名为myhost</span></span><br><span class="line">hostnamectl set-hostname myhost <span class="comment"># 永久设置，/etc/hostname也会改为myhost</span></span><br><span class="line">bash <span class="comment"># 启动一个新的bash进程就可以看到</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/resolv.conf</code>：存放dns配置的配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nameserver 223.5.5.5 # 阿里云的</span><br><span class="line">nameserver 8.8.8.8 # google的</span><br><span class="line">nameserver 114.114.114.114 # 电信的</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果网卡配置了dns，重启系统会覆盖&#x2F;etc&#x2F;resolv.conf；<code>注</code>：&#x2F;etc&#x2F;resolv.conf内的会被替换成网卡配置的dns。</li>
+<li>如果网卡不配置dns，则不会覆盖resolv.conf</li>
+</ul>
+<p>使用nslookup（bind-utils）查看域名解析</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup baidu.com</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/profile</code>：环境变量配置文件</p>
+<p>配置系统级环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 例如配置编辑器</span><br><span class="line">export EDITOR=vim</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/fstab</code>：挂载配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UUID 						mountPoint 		fileSystemType 	mountOption 	POST		backup 	</span><br><span class="line"></span><br><span class="line">/dev/mapper/centos-root 	/               xfs     		defaults        0 			0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>1.设备名称，一般除lvm逻辑卷基本都用UUID来替代</li>
+<li>2.挂载点，设备的入口</li>
+<li>3.文件系统类型</li>
+<li>4.挂载参数，defaults默认即可；<strong>eg</strong>：<code>mount -o remount,rw /sysroot</code> 这个<code>-o</code>意思就是option挂载参数的意思；或者swap设置<code>pri=5</code>设置该swap的优先级为5，默认是-2，这个是数字越大优先级越大，先用这个swap分区</li>
+<li>5.是否开机自检。 0不自检，1自检</li>
+<li>6.开机是否备份。0不备份，1备份</li>
+</ul>
+<p><code>/etc/rc.local</code>：给与可执行权限，重启将执行里面编写的命令</p>
+<p><code>/etc/inittab</code>：</p>
+<p>查看运行级别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runlevel</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>0：关机（init 0）</li>
+<li>1：单用户，忘记密码可以从这里找回</li>
+<li>2：多用户，但不支持NFS，网络文件系统（缺少很多功能）</li>
+<li>3：完全多用户，默认所在的界面就是3运行级别</li>
+<li>4：保留待开放</li>
+<li>5：桌面运行级别（init 5自动重启进入图形化界面）</li>
+<li>6：表示重启（init 6）</li>
+</ul>
+<p><code>/etc/motd</code>：登录输出显示里面的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**                                                                    </span><br><span class="line"> *            .,,       .,:;;iiiiiiiii;;:,,.     .,,                   </span><br><span class="line"> *          rGB##HS,.;iirrrrriiiiiiiiiirrrrri;,s&amp;##MAS,                </span><br><span class="line"> *         r5s;:r3AH5iiiii;;;;;;;;;;;;;;;;iiirXHGSsiih1,               </span><br><span class="line"> *            .;i;;s91;;;;;;::::::::::::;;;;iS5;;;ii:                  </span><br><span class="line"> *          :rsriii;;r::::::::::::::::::::::;;,;;iiirsi,               </span><br><span class="line"> *       .,iri;;::::;;;;;;::,,,,,,,,,,,,,..,,;;;;;;;;iiri,,.           </span><br><span class="line"> *    ,9BM&amp;,            .,:;;:,,,,,,,,,,,hXA8:            ..,,,.       </span><br><span class="line"> *   ,;&amp;@@#r:;;;;;::::,,.   ,r,,,,,,,,,,iA@@@s,,:::;;;::,,.   .;.      </span><br><span class="line"> *    :ih1iii;;;;;::::;;;;;;;:,,,,,,,,,,;i55r;;;;;;;;;iiirrrr,..       </span><br><span class="line"> *   .ir;;iiiiiiiiii;;;;::::::,,,,,,,:::::,,:;;;iiiiiiiiiiiiri         </span><br><span class="line"> *   iriiiiiiiiiiiiiiii;;;::::::::::::::::;;;iiiiiiiiiiiiiiiir;        </span><br><span class="line"> *  ,riii;;;;;;;;;;;;;:::::::::::::::::::::::;;;;;;;;;;;;;;iiir.       </span><br><span class="line"> *  iri;;;::::,,,,,,,,,,:::::::::::::::::::::::::,::,,::::;;iir:       </span><br><span class="line"> * .rii;;::::,,,,,,,,,,,,:::::::::::::::::,,,,,,,,,,,,,::::;;iri       </span><br><span class="line"> * ,rii;;;::,,,,,,,,,,,,,:::::::::::,:::::,,,,,,,,,,,,,:::;;;iir.      </span><br><span class="line"> * ,rii;;i::,,,,,,,,,,,,,:::::::::::::::::,,,,,,,,,,,,,,::i;;iir.      </span><br><span class="line"> * ,rii;;r::,,,,,,,,,,,,,:,:::::,:,:::::::,,,,,,,,,,,,,::;r;;iir.      </span><br><span class="line"> * .rii;;rr,:,,,,,,,,,,,,,,:::::::::::::::,,,,,,,,,,,,,:,si;;iri       </span><br><span class="line"> *  ;rii;:1i,,,,,,,,,,,,,,,,,,:::::::::,,,,,,,,,,,,,,,:,ss:;iir:       </span><br><span class="line"> *  .rii;;;5r,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sh:;;iri        </span><br><span class="line"> *   ;rii;:;51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.:hh:;;iir,        </span><br><span class="line"> *    irii;::hSr,.,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.,sSs:;;iir:         </span><br><span class="line"> *     irii;;:iSSs:.,,,,,,,,,,,,,,,,,,,,,,,,,,,..:135;:;;iir:          </span><br><span class="line"> *      ;rii;;:,r535r:...,,,,,,,,,,,,,,,,,,..,;sS35i,;;iirr:           </span><br><span class="line"> *       :rrii;;:,;1S3Shs;:,............,:is533Ss:,;;;iiri,            </span><br><span class="line"> *        .;rrii;;;:,;rhS393S55hh11hh5S3393Shr:,:;;;iirr:              </span><br><span class="line"> *          .;rriii;;;::,:;is1h555555h1si;:,::;;;iirri:.               </span><br><span class="line"> *            .:irrrii;;;;;:::,,,,,,,,:::;;;;iiirrr;,                  </span><br><span class="line"> *               .:irrrriiiiii;;;;;;;;iiiiiirrrr;,.                    </span><br><span class="line"> *                  .,:;iirrrrrrrrrrrrrrrrri;:.                        </span><br><span class="line"> *                        ..,:::;;;;:::,,.                             </span><br><span class="line"> */                                                                     </span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/etc/issue</code> <code>/etc/issue.net</code>：登录输出电脑配置信息的，不看可以清空只留&#x2F;etc&#x2F;motd</p>
+<p><code>/proc</code>内存的映射</p>
+<ul>
+<li>&#x2F;proc&#x2F;cpuinfo：查看cpu的信息</li>
+<li>&#x2F;proc&#x2F;meminfo：查看内存的信息</li>
+<li>&#x2F;proc&#x2F;loadavg：查看负载的信息</li>
+<li>&#x2F;proc&#x2F;mounts：查看挂载的信息</li>
+</ul>
+<p><strong>查看cpu</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看内存</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看磁盘</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看系统负载</strong></p>
+<p>系统负载是衡量操作系统的繁忙程度</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br><span class="line"></span><br><span class="line"> 当前时间      运行时长 登录用户数 平均负载      1分钟  5分钟  15分钟</span><br><span class="line"> 08:41:33 up  5:55,  1 user,  load average: 0.00, 0.01, 0.05</span><br><span class="line"> <span class="comment"># 如果负载与cpu核心数相同说明系统繁忙</span></span><br><span class="line"> <span class="comment"># 一般 平均负载/cpu核心数 &gt; 0.7则代表超载</span></span><br><span class="line"> <span class="comment"># 看需求，跑人工智能等需要消耗算力的表示能充分利用资源，对内的不影响</span></span><br><span class="line"> <span class="comment"># 对外提供服务的就需要考虑</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>查看系统负载和用户信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">w</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# w</span><br><span class="line"> 08:57:36 up  6:11,  1 user,  load average: 0.05, 0.03, 0.05</span><br><span class="line">登录用户  终端      连接IP(指发起远程的)登录时间                     当前执行的命令</span><br><span class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    192.168.192.1    08:30    0.00s  0.03s  0.01s w</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我这里通过VMnet8虚拟网卡的IP192.168.192.1连接到我虚拟机IP的192.168.192.100</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>/var/log/messages</code>：系统日志文件</p>
+<p><code>/var/log/secure</code>：系统安全日志，大体就是登录和退出日志</p>
+<p>&#x2F;var&#x2F;log&#x2F;nginx&#x2F;nginx.log：nginx服务日志，eg：有一些服务日志不输出到messages</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不退出文件，实时显示文件末尾的变化</span></span><br><span class="line"><span class="built_in">tail</span> -f == tailf <span class="comment"># 但是tailf不是别名是独立的命令</span></span><br><span class="line"><span class="built_in">tail</span> -F <span class="comment"># 也是实时显示末尾变化，但是文件不存在也行，一存在就输出</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mariohy.github.io">MarioHY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mariohy.github.io/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">https://mariohy.github.io/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://mariohy.github.io" target="_blank">咸鱼の小破站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E5%9F%BA%E7%A1%80/">基础</a><a class="post-meta__tags" href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">配置文件</a></div><div class="post-share"><div class="social-share" data-image="/img/cover/one.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-3-vim%E5%AE%9E%E7%94%A8%E6%93%8D%E4%BD%9C/" title="Linux基础(3)-vim实用操作"><i class="fas fa-chevron-left prev-icon"><div class="prev-label">上一篇</div></i></a><div class="pagination-card"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/three.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux基础(3)-vim实用操作</div></div></div></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/09/19/Linux%E5%9F%BA%E7%A1%80-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Linux基础(1)-虚拟机网络配置"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/ten.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-19</div><div class="info-item-2">Linux基础(1)-虚拟机网络配置</div></div><div class="info-2"><div class="info-item-1">虚拟机VMware网络虚拟机网络服务network旧版的网络服务，早期的Linux服务器和嵌入设备，提供稳定的静态网络管理。 配置文件：/etc/sysconfig/network-scripts/ifcfg-ethxx 如下是配置静态ip的关键点 1234567ONBOOT=yesBOOTPROTO=staticIPADDR=192.168.113.110NETMASK=255.255.255.0GATEWAY=192.168.113.245DNS1=114.114.114.114DNS2=8.8.8.8   ONBOOT ：是否启用该设备 BOOTPROTO ： 如何获取IP的参数。例如none、static、dhcp、bootp IPADDR ： 自定义的IP地址 NETMASK ： 划分子网 GATEWAY ： 网关地址，转到Internet的中间人 DNS ： 解析域名的IP地址  NetworkManager新版的网络服务， 动态网络环境的支持，一个高级的网络管理器，提供了有nmtui图形化管理、nmcli命令行工具并提供了自动检测和配置网络连接的功能，支持多分网络连...</div></div></div></a><a class="pagination-related" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-2-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" title="Linux基础(2)-基础命令行操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/seven.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">Linux基础(2)-基础命令行操作</div></div><div class="info-2"><div class="info-item-1">命令行1.系统启动相关命令1234567891011121314shutdown # 关机，默认1分钟后关机shutdown -h now # 现在立即关机shutdown -h 5 # 提示5分钟之后关机poweroff # 直接关机init 0 # 直接关键shutdown -r now # 立即重启shutdown -r 5 # 5分钟后重启reboot # 直接重启init 6 # 直接重启  init中的数字含义如下表：  0：关机 1：root单用户模式 2：多用户模式 3：完全多用户模式 4：安全模式 5：图形化 6：重启  2.关键点2.1终端shell指令结构：命令  + 选项 +  参数 物理控制台 ： 物理机上控制的桌面环境 虚拟控制台 ：   &#x2F;dev&#x2F;tty{1..6}，物理机上的虚拟控制台，物理机切换虚拟控制台命令是ctrl+alt&#123;F1..F6&#125; &#x2F;dev&#x2F;pts&#x2F;{0..N}，ssh远程连接的虚拟控制台  2.2终端快捷键12345678910111213141516171819...</div></div></div></a><a class="pagination-related" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-3-vim%E5%AE%9E%E7%94%A8%E6%93%8D%E4%BD%9C/" title="Linux基础(3)-vim实用操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/three.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-20</div><div class="info-item-2">Linux基础(3)-vim实用操作</div></div><div class="info-2"><div class="info-item-1">vim1.normal移动光标123456789101112131415h（hang）# 左移一位j（jump）# 下移一位k（kick）# 上移一位l（leap）# 右移一位nh、nj、nk、nl # 左、下、上、右移动n位0 # 移动到行头^ # 移动到行头$ # 移动到行尾G # 移动光标到末尾nG # 移动到第n行gg # 快速移动光标到首行w # 移动到下一个单词头e # 移动到下一个单词尾b # 移动到上一个单词头f+字符 # 移动到当前行下一个匹配成功的单个字符  删除内容12345678910x # 剪切当前光标字符dd # 剪切当前行ndd # 剪切下n行（n行包括当前行）d0 # 剪切当前光标到行首部分d^ # 剪切当前光标到行首部分d$ # 剪切当前光标到行尾部分D # 剪切当前光标到行尾dw # 剪切到下一个单词头de # 剪切到下一个单词尾dG # 快速剪切光标到底部的所有内容  复制内容12yy # 复制当前行nyy # 复制n行  粘贴内容： 12pp # 粘贴复制或者剪切内容npp # 粘贴n次  撤销内容12u # 撤销到上一步操作ctrl+r ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">MarioHY</div><div class="author-info-description">一只躺不平的小咸鱼~</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MarioHY"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/MarioHY" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="/mariohyn@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">👏👏 希望和各位站友共同进步！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A6%81%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">系统重要的配置文件</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" title="Linux基础(4)-基本配置文件"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/one.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础(4)-基本配置文件"/></a><div class="content"><a class="title" href="/2025/09/22/Linux%E5%9F%BA%E7%A1%80-4-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" title="Linux基础(4)-基本配置文件">Linux基础(4)-基本配置文件</a><time datetime="2025-09-22T15:25:21.000Z" title="发表于 2025-09-22 23:25:21">2025-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-3-vim%E5%AE%9E%E7%94%A8%E6%93%8D%E4%BD%9C/" title="Linux基础(3)-vim实用操作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/three.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础(3)-vim实用操作"/></a><div class="content"><a class="title" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-3-vim%E5%AE%9E%E7%94%A8%E6%93%8D%E4%BD%9C/" title="Linux基础(3)-vim实用操作">Linux基础(3)-vim实用操作</a><time datetime="2025-09-20T13:26:27.000Z" title="发表于 2025-09-20 21:26:27">2025-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-2-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" title="Linux基础(2)-基础命令行操作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/seven.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础(2)-基础命令行操作"/></a><div class="content"><a class="title" href="/2025/09/20/Linux%E5%9F%BA%E7%A1%80-2-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" title="Linux基础(2)-基础命令行操作">Linux基础(2)-基础命令行操作</a><time datetime="2025-09-20T12:43:05.000Z" title="发表于 2025-09-20 20:43:05">2025-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/19/Linux%E5%9F%BA%E7%A1%80-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Linux基础(1)-虚拟机网络配置"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/ten.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础(1)-虚拟机网络配置"/></a><div class="content"><a class="title" href="/2025/09/19/Linux%E5%9F%BA%E7%A1%80-1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="Linux基础(1)-虚拟机网络配置">Linux基础(1)-虚拟机网络配置</a><time datetime="2025-09-19T13:28:41.000Z" title="发表于 2025-09-19 21:28:41">2025-09-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/18/rocky%E9%83%A8%E7%BD%B2k8s/" title="rocky部署k8s"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/cover/four.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="rocky部署k8s"/></a><div class="content"><a class="title" href="/2025/09/18/rocky%E9%83%A8%E7%BD%B2k8s/" title="rocky部署k8s">rocky部署k8s</a><time datetime="2025-09-18T00:36:31.000Z" title="发表于 2025-09-18 08:36:31">2025-09-18</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list expandBtn" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/linux/"><span class="card-category-list-name">linux</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">安装教程</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">部署教程</span><span class="card-category-list-count">3</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 1.45em; color: rgb(139, 199, 121);">Linux</a><a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 1.45em; color: rgb(59, 125, 55);">基础</a><a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.15em; color: rgb(50, 172, 147);">虚拟机网络</a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.15em; color: rgb(96, 50, 135);">命令行</a><a href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" style="font-size: 1.15em; color: rgb(99, 133, 145);">配置文件</a><a href="/tags/vim/" style="font-size: 1.15em; color: rgb(50, 178, 90);">vim</a><a href="/tags/arch/" style="font-size: 1.15em; color: rgb(185, 187, 50);">arch</a><a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 1.25em; color: rgb(68, 181, 106);">安装</a><a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.35em; color: rgb(116, 147, 181);">教程</a><a href="/tags/fedora/" style="font-size: 1.15em; color: rgb(104, 161, 126);">fedora</a><a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 1.15em; color: rgb(184, 142, 102);">虚拟化</a><a href="/tags/gentoo/" style="font-size: 1.15em; color: rgb(148, 191, 128);">gentoo</a><a href="/tags/k8s/" style="font-size: 1.15em; color: rgb(79, 91, 77);">k8s</a><a href="/tags/rocky/" style="font-size: 1.15em; color: rgb(107, 79, 89);">rocky</a><a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 1.25em; color: rgb(60, 181, 137);">部署</a><a href="/tags/rustdesk/" style="font-size: 1.15em; color: rgb(105, 133, 101);">rustdesk</a><a href="/tags/%E4%B8%AD%E7%BB%A7%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.15em; color: rgb(171, 155, 79);">中继服务器</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">8</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">9</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-22T15:26:40.415Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/default_top_img.webp);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By MarioHY</span><span class="framework-info"><span>网站 </span><a target="_blank" rel="noopener" href="https://github.com/MarioHY/">github</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">2</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><canvas id="star-canvas"></canvas><script src="/js/star-canvas.js"></script><div class="aplayer no-destroy" data-id="13866167529" data-server="netease" data-position="right" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><script src="/js/fixed-pagination.js" async></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.5" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax src="https://unpkg.com/oh-my-live2d"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,models:[{"path":"/live2d-models/lafei_4/lafei_4.model3.json","position":[-100,55],"scale":0.07,"stageStyle":{"width":350,"height":500,"opacity":0.9},"mobilePosition":[-10,23],"mobileScale":0.07,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"ALL"},{"path":"/live2d-models/lafei/lafei.model3.json","position":[-45,0],"scale":0.3,"stageStyle":{"width":250,"height":350,"opacity":1},"mobilePosition":[-10,23],"mobileScale":0.08,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"NONE"},{"path":"/live2d-models/mingshi/mingshi.model3.json","position":[-50,0],"scale":0.3,"stageStyle":{"width":250,"height":370,"opacity":1},"mobilePosition":[-10,50],"mobileScale":0.08,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"NONE"},{"path":"/live2d-models/xuefeng/xuefeng.model3.json","position":[-50,0],"scale":0.3,"stageStyle":{"width":250,"height":370,"opacity":1},"mobilePosition":[-10,23],"mobileScale":0.1,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"NONE"}],parentElement:document.body,primaryColor:"var(--btn-bg)",sayHello:false,tips:{style: {"width":230,"height":120,"left":"calc(50% - 20px)","top":"-100px"},mobileStyle: {"width":180,"height":80,"left":"calc(50% - 30px)","top":"-100px"},idleTips:{interval:3600,message:["你好呀，我是一只躺不平的小咸鱼~","欢迎来到我的小破站~"]}}});</script><!-- hexo injector body_end end --></body></html>
