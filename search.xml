@@ -136,11 +136,11 @@
       
         <tags>
             
-            <tag> 部署 </tag>
-            
             <tag> k8s </tag>
             
             <tag> rocky </tag>
+            
+            <tag> 部署 </tag>
             
         </tags>
       
@@ -252,11 +252,11 @@
       
         <tags>
             
+            <tag> 部署 </tag>
+            
             <tag> rustdesk </tag>
             
             <tag> 中继服务器 </tag>
-            
-            <tag> 部署 </tag>
             
         </tags>
       
