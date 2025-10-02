@@ -223,11 +223,11 @@
       
         <tags>
             
+            <tag> 教程 </tag>
+            
             <tag> arch </tag>
             
             <tag> 安装 </tag>
-            
-            <tag> 教程 </tag>
             
         </tags>
       
@@ -252,9 +252,9 @@
       
         <tags>
             
-            <tag> 安装 </tag>
-            
             <tag> 教程 </tag>
+            
+            <tag> 安装 </tag>
             
             <tag> gentoo </tag>
             
@@ -281,11 +281,11 @@
       
         <tags>
             
-            <tag> 教程 </tag>
-            
             <tag> fedora </tag>
             
             <tag> 虚拟化 </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       
