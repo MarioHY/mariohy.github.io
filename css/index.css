@@ -4328,9 +4328,6 @@ figure.highlight pre .javascript .function {
   -ms-transform: translateY(10px);
   transform: translateY(10px);
 }
-#page-header:not(.not-top-img):before {
-  background-color: rgba(0,0,0,0.17) !important;
-}
 .loading-bg {
   display: -webkit-box;
   display: -moz-box;
