@@ -4321,19 +4321,19 @@ figure.highlight pre .javascript .function {
   -ms-transform: translateY(10px);
   transform: translateY(10px);
 }
-#page-header.not-home-page:before {
+[data-theme="dark"] #page-header.not-home-page:before {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.4);
   content: '';
   z-index: 0;
 }
-#page-header.not-home-page #page-site-info {
+[data-theme="dark"] #page-header.not-home-page #page-site-info {
   position: relative;
   z-index: 1;
 }
-#page-header.not-home-page #nav {
+[data-theme="dark"] #page-header.not-home-page #nav {
   z-index: 10;
 }
 .loading-bg {
