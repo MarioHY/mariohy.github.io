@@ -365,13 +365,6 @@
   </url>
   
   <url>
-    <loc>https://mariohy.github.io/tags/gentoo/</loc>
-    <lastmod>2026-04-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://mariohy.github.io/tags/k8s/</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -387,6 +380,13 @@
   
   <url>
     <loc>https://mariohy.github.io/tags/%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mariohy.github.io/tags/gentoo/</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
