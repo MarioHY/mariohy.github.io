@@ -63,3 +63,91 @@ h1,h2,h3,h4,h5,h6,#subtitle,.content,.line,.post-content p,.post-content li{
 .post-meta-date:hover,.post-meta-date-created:hover{
 	cursor: url('./mouse/fangzhou/help.cur'), auto!important;
 }
+
+
+
+
+
+
+
+
+/* --- 1. 全局及基础文本 --- */
+body, html {
+  cursor: url('./mouse/fangzhou/normal.cur'), auto !important;
+}
+
+/* 扩大文本选择范围，包含摘要、侧边栏文字、代码行、评论等 */
+p, span, h1, h2, h3, h4, h5, h6, #subtitle, .content, .line, 
+.post-content, .aside-content, .comment-content, code, pre,
+.article-title, .article-meta, #site-subtitle {
+  cursor: url('./mouse/fangzhou/text.cur'), auto;
+}
+
+/* --- 2. 链接、按钮及 Butterfly 专属交互元素 --- */
+/* 补充了：右下角悬浮按钮、Toc 目录、标签云、搜索按钮、各种图标 */
+a, 
+button, 
+img,
+.site-page, 
+#site-name, 
+.aside-list-item, 
+.tag-cloud-list a, 
+.category-list-link,
+.toc-link, 
+#rightside button, 
+#rightside a, 
+#rightside .item-submit,
+.search-nav, 
+.search-result-item a,
+#search-button,
+.fancybox__slide, 
+.carousel__slide,
+.is-click,
+i.fas, i.far, i.fab, svg, /* 修正图标上失效的问题 */
+.scroll-down-effects { 
+  cursor: url('./mouse/fangzhou/link.cur'), auto !important;
+}
+
+/* --- 3. 辅助/提示类元素 --- */
+/* 补充了：复制按钮、展开按钮、页码、日期、页脚链接 */
+.copy-button, 
+.expand, 
+#pagination .page-number, 
+.post-meta-date, 
+.post-meta-date-created, 
+.post-meta-categories,
+.post-meta-separator,
+#footer-wrap a {
+  cursor: url('./mouse/fangzhou/help.cur'), auto !important;
+}
+
+/* --- 4. 输入框及滚动条 --- */
+input, textarea {
+  cursor: url('./mouse/fangzhou/text.cur'), auto !important;
+}
+
+/* 滚动条部分 */
+::-webkit-scrollbar, 
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track {
+  cursor: url('./mouse/fangzhou/move.cur'), auto !important;
+}
+
+/* --- 5. 评论系统与特殊组件适配 --- */
+/* 包含 Waline, Gitalk, Valine 等常用按钮 */
+.switch-btn, 
+.gt-user-inner, .gt-ico, .gt-btn, 
+.vbtn, .at_button, 
+.wl-btn, .wl-header, .wl-header label {
+  cursor: url('./mouse/fangzhou/normal.cur'), auto !important;
+}
+
+
+/* 自定义台灯/风铃挂件及其所有子元素的鼠标指针 */
+.wind-bell-toggle,
+.wind-bell-toggle *,
+.wind-bell-toggle .thread,
+.wind-bell-toggle .bell-body,
+.wind-bell-toggle .bell-body::after {
+    cursor: url('./mouse/fangzhou/link.cur'), auto !important;
+}
