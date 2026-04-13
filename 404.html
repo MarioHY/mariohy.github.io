@@ -100,7 +100,7 @@
             .msg { font-size: 1.1rem; }
             .btn-group { flex-direction: column; }
         }
-        /* ------ 魔法阵特效 新css ------- */
+        /* ------ 魔法阵特效 ------- */
         :root {
             --magic-color: #d1a3ff;
             --magic-glow: 0 0 25px rgba(186, 104, 200, 0.8);
@@ -260,6 +260,15 @@
         </div>
     </div>
     <script>
+        (function() {
+            console.log(
+                ` %c 魔力注入 %c MarioHy `,
+                'background: #ba68c8; padding: 1px 4px; border-radius: 3px 0 0 3px; color: #fff; font-weight: bold; text-shadow: 0 0 5px rgba(255,255,255,0.5);',
+                'background: #1a1a1a; padding: 1px 4px; border-radius: 0 3px 3px 0; color: #d1a3ff; border: 1px solid #ba68c8;'
+            );
+            console.log('%c(ﾉ>ω<)ﾉ ⚙️ 狂风臣服，万物逆转！', 'color: #ba68c8; font-family: serif;');
+            console.log('%cΔ 迷途的灵魂啊，在此献上你的魔力，随咱一同开启通往新世界的大门！', 'color: #ba68c8; font-family: serif;');
+        })();
         // [0] 专用加载提示，其余为随机显示
         const catQuotes = [
             "正在注入魔力，重置因果律喵！", // [0] 切换加载专用
