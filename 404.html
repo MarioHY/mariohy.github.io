@@ -233,7 +233,7 @@
 </head>
 <body>
     <div class="bg-box">
-        <img id="anime-bg" src="https://mariohy.dpdns.org" onload="showImage(this)">
+        <img id="anime-bg" src="https://acgapi.dpdns.org" onload="showImage(this)">
     </div>
     <div class="overlay"></div>
     <div class="content">
@@ -301,7 +301,7 @@
             els.msg.style.opacity = '0.5';
             els.msg.innerText = catQuotes[LOADING_INDEX];
 
-            const newImgUrl = `https://mariohy.dpdns.org?t=${Date.now()}`;
+            const newImgUrl = `https://acgapi.dpdns.org?t=${Date.now()}`;
             try {
                 await preloadImage(newImgUrl);
                 els.bg.style.opacity = '0';
